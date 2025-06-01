@@ -50,10 +50,10 @@ npm run prisma-studio
 
 ### 4. Environment Variables
 
- Create a `.env` file with:
-  ```
-  DATABASE_URL="file:./dev.db"
-  ```
+Create a `.env` file with:
+```
+DATABASE_URL="file:./dev.db"
+```
 
 ### 5. Start the Development Server
 

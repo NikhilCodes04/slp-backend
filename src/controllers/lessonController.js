@@ -29,9 +29,23 @@ exports.getLessons = async (req, res) => {
 
 // Create a new exercise for a lesson
 exports.createExercise = async (req, res) => {
-    const { lessonId, type, prompt, options, expectedAnswer } = req.body;
-    if (!lessonId || !type || !prompt || !options || !expectedAnswer) {
+    const { lessonId, type, prompt, data } = req.body;
+    if (!lessonId || !type || !prompt || !data) {
         return res.status(400).json({ error: 'All fields are required' });
+    }
+    // Validate data structure based on type
+    if (type === 'MCQ') {
+        if (!Array.isArray(data.options) || !Array.isArray(data.expectedAnswer)) {
+            return res.status(400).json({ error: 'MCQ data must have options and expectedAnswer arrays' });
+        }
+    } else if (type === 'FILL_BLANK') {
+        if (!Array.isArray(data.expectedAnswer)) {
+            return res.status(400).json({ error: 'FILL_BLANK data must have expectedAnswer array' });
+        }
+    } else if (type === 'MATCH') {
+        if (!Array.isArray(data.pairs)) {
+            return res.status(400).json({ error: 'MATCH data must have pairs array' });
+        }
     }
     try {
         const exercise = await prisma.exercise.create({
@@ -39,8 +53,7 @@ exports.createExercise = async (req, res) => {
                 lessonId,
                 type,
                 prompt,
-                options: JSON.stringify(options),
-                expectedAnswer: JSON.stringify(expectedAnswer)
+                data
             }
         });
         res.status(201).json(exercise);

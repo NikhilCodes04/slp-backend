@@ -1,12 +1,11 @@
 datasource db {
     provider = "sqlite"
-    url      = "file:../../dev.db"
+    url      = env("DATABASE_URL")
 }
 
 generator client {
     provider = "prisma-client-js"
 }
-
 
 model User {
     id                 Int                  @id @default(autoincrement())
@@ -29,15 +28,20 @@ model Lesson {
     lessonProgress UserLessonProgress[]
 }
 
+enum ExerciseType {
+    MCQ
+    FILL_BLANK
+    MATCH
+}
+
 model Exercise {
-    id             Int               @id @default(autoincrement())
-    lesson         Lesson            @relation(fields: [lessonId], references: [id])
-    lessonId       Int
-    type           String
-    prompt         String
-    options        String // JSON string
-    expectedAnswer String // JSON string
-    attempts       ExerciseAttempt[]
+    id       Int               @id @default(autoincrement())
+    lesson   Lesson            @relation(fields: [lessonId], references: [id])
+    lessonId Int
+    type     ExerciseType
+    prompt   String
+    data     Json
+    attempts ExerciseAttempt[]
 }
 
 model UserLessonProgress {
@@ -59,5 +63,3 @@ model ExerciseAttempt {
     attemptedAt DateTime
     xpAwarded   Int
 }
-
-

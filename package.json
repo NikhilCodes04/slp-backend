@@ -8,7 +8,8 @@
     "prisma-migrate": "prisma migrate dev --schema=src/models/schema.prisma",
     "prisma-studio": "prisma studio --schema=src/models/schema.prisma",
     "prisma-status": "prisma migrate status --schema=src/models/schema.prisma",
-    "dev": "nodemon src/app.js"
+    "dev": "nodemon src/app.js",
+    "build": "npm install && npm run prisma-generate && npm run prisma-migrate"
   },
   "keywords": [],
   "author": "",
