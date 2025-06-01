@@ -67,16 +67,16 @@ The server will start on `http://localhost:3000`.
 
 ### User
 
-- `POST /user/register` — Register a new user
-- `POST /user/login` — Login
-- `GET /user/profile` — Get user profile (requires `userId` in body)
+- `POST /user/register`  Register a new user
+- `POST /user/login` Login
+- `GET /user/profile` Get user profile (requires `userId` in body)
 
 ### Lessons & Exercises
 
-- `POST /api/lessons` — Create a lesson
-- `GET /api/lessons` — List all lessons
-- `POST /api/exercises` — Create an exercise
-- `GET /api/lessons/:lessonId/exercises` — List exercises for a lesson
+- `POST /api/lessons` Create a lesson
+- `GET /api/lessons`  List all lessons
+- `POST /api/exercises`  Create an exercise
+- `GET /api/lessons/:lessonId/exercises`  List exercises for a lesson
 
 ### Progress
 
