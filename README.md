@@ -80,11 +80,11 @@ The server will start on `http://localhost:3000`.
 
 ### Progress
 
-- `POST /progress/complete-lesson` — Mark lesson as completed
-- `GET /progress/completed-lessons/:userId` — Get completed lessons for user
-- `POST /progress/exercise-attempt` — Record an exercise attempt
-- `GET /progress/exercise-attempts/:userId` — Get all attempts for user
-- `GET /progress/leaderboard/weekly` — Weekly leaderboard by XP
+- `POST /progress/complete-lesson`  Mark lesson as completed
+- `GET /progress/completed-lessons/:userId`  Get completed lessons for user
+- `POST /progress/exercise-attempt`  Record an exercise attempt
+- `GET /progress/exercise-attempts/:userId`  Get all attempts for user
+- `GET /progress/leaderboard/weekly`  Weekly leaderboard by XP
 
 ## Project Structure
 
