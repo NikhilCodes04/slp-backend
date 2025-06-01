@@ -1,0 +1,63 @@
+datasource db {
+    provider = "sqlite"
+    url      = "file:../../dev.db"
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+
+model User {
+    id                 Int                  @id @default(autoincrement())
+    name               String
+    email              String               @unique
+    password           String
+    xp                 Int                  @default(0)
+    current_streak     Int                  @default(0)
+    last_activity_date DateTime?
+    lessonProgress     UserLessonProgress[]
+    exerciseAttempts   ExerciseAttempt[]
+}
+
+model Lesson {
+    id             Int                  @id @default(autoincrement())
+    title          String
+    level          Int
+    topic          String
+    exercises      Exercise[]
+    lessonProgress UserLessonProgress[]
+}
+
+model Exercise {
+    id             Int               @id @default(autoincrement())
+    lesson         Lesson            @relation(fields: [lessonId], references: [id])
+    lessonId       Int
+    type           String
+    prompt         String
+    options        String // JSON string
+    expectedAnswer String // JSON string
+    attempts       ExerciseAttempt[]
+}
+
+model UserLessonProgress {
+    id          Int      @id @default(autoincrement())
+    user        User     @relation(fields: [userId], references: [id])
+    userId      Int
+    lesson      Lesson   @relation(fields: [lessonId], references: [id])
+    lessonId    Int
+    completedAt DateTime
+}
+
+model ExerciseAttempt {
+    id          Int      @id @default(autoincrement())
+    user        User     @relation(fields: [userId], references: [id])
+    userId      Int
+    exercise    Exercise @relation(fields: [exerciseId], references: [id])
+    exerciseId  Int
+    isCorrect   Boolean
+    attemptedAt DateTime
+    xpAwarded   Int
+}
+
+
