@@ -50,7 +50,7 @@ npm run prisma-studio
 
 ### 4. Environment Variables
 
-- The `.env` file is already configured for SQLite:
+ Create a `.env` file with:
   ```
   DATABASE_URL="file:./dev.db"
   ```
